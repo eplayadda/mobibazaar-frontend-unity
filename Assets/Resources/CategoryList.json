@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "categoryName": "kirana",
+    "description": "this is kirana description",
+    "imageUrl": "http://www.google.com",
+    "parent_id": null
+  },
+  {
+    "id": 2,
+    "categoryName": "dal",
+    "description": "this is dal description",
+    "imageUrl": "http://www.dal.com",
+    "parent_id": 1
+  },
+  {
+    "id": 3,
+    "categoryName": "Rice",
+    "description": "this is dal description",
+    "imageUrl": "http://www.dal.com",
+    "parent_id": 1
+  },
+  {
+    "id": 4,
+    "categoryName": "Vegitable",
+    "description": "Tshirt desc",
+    "imageUrl": "http://tshirt.com",
+    "parent_id": null
+  },
+  {
+    "id": 5,
+    "categoryName": "Fruits",
+    "description": "Tshirt desc",
+    "imageUrl": "http://tshirt.com",
+    "parent_id": null
+  }
+]
