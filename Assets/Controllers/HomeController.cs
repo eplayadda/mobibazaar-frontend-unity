@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using mb;
+using System.Linq;
 using UnityEngine.UI;
-using System.IO;
 
 public class HomeController : MonoBehaviour
 {
@@ -11,6 +11,7 @@ public class HomeController : MonoBehaviour
     public Activation loadingPanel;
     public Transform parent;
     public string categoryListPath;
+    CategoryList categoryList;
     Router router;
     [HideInInspector] HomeView signUpView;
     public bool isLoggedIn;
@@ -27,40 +28,37 @@ public class HomeController : MonoBehaviour
         router = gameObject.GetComponentInParent<Router>();
         signUpView = (HomeView)gameObject.GetComponent<IView>();
         OnClickEvents();
+        GetCategoryData();
     }
 
    
     void RenderData()
     {
         signUpView.logOutTxt.text = isLoggedIn ? "LogOut" : "LogIN";
-        DisplayCategorys();
+        ShowCategoies();
     }
     void OnClickEvents()
     {
         signUpView.logOutBtn.onClick.AddListener(() => { OnLogOutClicked(); });
     }
 
-
-    void DisplayCategorys()
+    void GetCategoryData()
     {
         var response = Resources.Load<TextAsset>(categoryListPath);
         var str = "{\"categories\":" + response.text + "}";
-        var loginResponse = JsonUtility.FromJson<Category[]>(str);
-        Debug.Log(str);
-
-        //string path = Application.streamingAssetsPath + "/"+ categoryListPath;
-        //string contents = File.ReadAllText(path);
-
-        //  var loginResponse = JsonUtility.FromJson<CategoryData>(contents);
-
-
+        categoryList = JsonUtility.FromJson<CategoryList>(str);
+    }
+    void ShowCategoies(int parentID = 0)
+    {
+        var parentCategories = categoryList.categories.Where(x => x.parent_id == parentID).ToList();
         loadingPanel.OnDeactivation();
-        for (int i = 0; i < 4; i++)
+
+        foreach (var item in parentCategories)
         {
             GameObject go = Instantiate(category_ProtoType) as GameObject;
-            CategoryViews category = go.GetComponent<CategoryViews>();
+            CategoryViews mCategoryViews = go.GetComponent<CategoryViews>();
             Button button = go.GetComponent<Button>();
-            category.id = i;
+            mCategoryViews.category = item;
             button.onClick.AddListener(() =>
                 SetecedCategory(button.gameObject.GetComponent<CategoryViews>())
             );
@@ -68,6 +66,7 @@ public class HomeController : MonoBehaviour
             go.transform.SetParent(parent, true);
             categaries.Add(go);
         }
+       
     }
 
     void DestoryCategory()
@@ -76,11 +75,24 @@ public class HomeController : MonoBehaviour
         {
             Destroy(item);
         }
+        categaries.Clear();
     }
-    void SetecedCategory(CategoryViews category)
+    void SetecedCategory(CategoryViews categoryView)
     {
-        loadingPanel.OnActivation();
-        Debug.Log("Selected Category ::"+ category.id);
+      //  loadingPanel.OnActivation();
+        Debug.Log("Selected Category ::"+ categoryView.category.id);
+        var subCategories = categoryList.categories.Where(x => x.parent_id == categoryView.category.id).ToList();
+        if(subCategories.Count>0)
+        {
+            //  loadingPanel.OnDeactivation();
+            DestoryCategory();
+            ShowCategoies(categoryView.category.id);
+        }
+        else
+        {
+
+        }
+
     }
     void OnLogOutClicked()
     {

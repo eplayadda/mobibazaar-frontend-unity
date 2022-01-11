@@ -1,15 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 namespace mb
 {
-    [SerializeField]
 
-    public class CategoryData : MonoBehaviour
-    {
-        Category[] categories;
-    }
-    [SerializeField]
+
+    [Serializable]
+
     public class Category
     {
         public int id;
@@ -17,6 +15,12 @@ namespace mb
         public string description;
         public string imageUrl;
         public int parent_id;
+    }
+    [Serializable]
+
+    public class CategoryList
+    {
+        public List<Category> categories;
     }
 
 }

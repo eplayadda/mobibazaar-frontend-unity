@@ -5,7 +5,7 @@ namespace mb
 {
     public class CategoryViews : MonoBehaviour
     {
-        public int id;
+        public Category category;
     }
 }
 
