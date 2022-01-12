@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ProductDetailsView : MonoBehaviour
+public class ProductDetailsView :MonoBehaviour, IView
 {
     public Image image;
     public Text productName;
@@ -12,4 +12,21 @@ public class ProductDetailsView : MonoBehaviour
     public Text priceTxt;
     public Text orderPriceTxt;
     public Button addToCartsBtn;
+
+    public void Activate()
+    {
+        gameObject.SetActive(true);
+
+    }
+
+    public void Deactivate()
+    {
+        gameObject.SetActive(false);
+
+    }
+
+    public string GameObjectName()
+    {
+        return transform.name;
+    }
 }
