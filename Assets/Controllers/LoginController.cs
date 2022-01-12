@@ -41,7 +41,7 @@ public class LoginController : MonoBehaviour, IBackButton
         if (success)
         {
             loginResponse = JsonUtility.FromJson<LoginResponse>(response);
-            MbApplicationData.AccessToken = loginResponse.access_token;
+            MBApplicationData.Instance.AccessToken = loginResponse.access_token;
             router.ActivateScreen("Home");
         }
         else

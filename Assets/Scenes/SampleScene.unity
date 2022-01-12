@@ -2410,6 +2410,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Login
       objectReference: {fileID: 0}
+    - target: {fileID: 8205597091835548051, guid: c511bc5288dc2c344bbbb4d8cb32ec1f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9077549663341337882, guid: c511bc5288dc2c344bbbb4d8cb32ec1f,
         type: 3}
       propertyPath: m_AnchoredPosition.y

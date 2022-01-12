@@ -63,7 +63,7 @@ public class HomeController : MonoBehaviour
                 SetecedCategory(button.gameObject.GetComponent<CategoryViews>())
             );
 
-            go.transform.SetParent(parent, true);
+            go.transform.SetParent(parent, false);
             categaries.Add(go);
         }
        
@@ -90,6 +90,8 @@ public class HomeController : MonoBehaviour
         }
         else
         {
+            MBApplicationData.Instance.selectedCategoryID = categoryView.category.id;
+            router.ActivateScreen("Products_List");
 
         }
 

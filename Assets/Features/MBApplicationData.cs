@@ -10,7 +10,7 @@ namespace mb
         public static string KEY_AccessToken = "AccessToken";
         string accessToken;
         static MBApplicationData mInstance;
-
+        public int selectedCategoryID;
         public static MBApplicationData Instance
         {
             get

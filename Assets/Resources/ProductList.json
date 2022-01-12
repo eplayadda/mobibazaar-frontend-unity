@@ -1,0 +1,18 @@
+[
+  {
+    "categoryId": 2,
+    "description": "Aam",
+    "id": 1,
+    "imageURL": "string",
+    "name": "Mango",
+    "price": 200
+  },
+  {
+    "categoryId": 2,
+    "description": "Banana",
+    "id": 2,
+    "imageURL": "string",
+    "name": "KEla",
+    "price": 100
+  }
+]
