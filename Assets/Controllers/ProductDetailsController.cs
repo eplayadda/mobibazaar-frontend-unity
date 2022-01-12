@@ -1,18 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-
-public class ProductDetailsController : MonoBehaviour
+namespace mb
 {
-    // Start is called before the first frame update
-    void Start()
+    public class ProductDetailsController : MonoBehaviour
     {
-        
+        public string categoryListPath;
+        public ProductList productList;
+
+        void OnEnable()
+        {
+            SetProductByID();
+        }
+        void SetProductByID()
+        {
+            var response = Resources.Load<TextAsset>(categoryListPath);
+            var str = "{\"products\":" + response.text + "}";
+            productList = JsonUtility.FromJson<ProductList>(str);
+            ShowProduct();
+        }
+        void ShowProduct()
+        {
+            var pID = MBApplicationData.Instance.selectedProductID;
+            var mProduct = productList.products.Where(x => x.id == pID).ToList();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

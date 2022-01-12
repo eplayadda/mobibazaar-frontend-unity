@@ -11,6 +11,7 @@ namespace mb
         string accessToken;
         static MBApplicationData mInstance;
         public int selectedCategoryID;
+        public int selectedProductID;
         public static MBApplicationData Instance
         {
             get
