@@ -16,7 +16,7 @@ public class HomeController : BaseController
     public bool isLoggedIn;
 
     public List<GameObject> categaries = new List<GameObject>();
-    Stack<int> callStack = new Stack<int>(); 
+    public Stack<int> callStack = new Stack<int>(); 
     private void Awake()
     {
         router = gameObject.GetComponentInParent<Router>();
@@ -27,9 +27,10 @@ public class HomeController : BaseController
     private void OnEnable()
     {
         //Checking for login
+      //  ResetData();
         loadingPanel.OnActivation();
         isLoggedIn = string.IsNullOrEmpty(MBApplicationData.Instance.AccessToken) ? false : true;
-        RenderData();
+        ShowCategoies(MBApplicationData.Instance.selectedCategoryID);
     }
    
 
@@ -37,8 +38,6 @@ public class HomeController : BaseController
     void RenderData()
     {
         signUpView.logOutTxt.text = isLoggedIn ? "LogOut" : "LogIN";
-
-        ShowCategoies();
     }
     void OnClickEvents()
     {
@@ -58,21 +57,28 @@ public class HomeController : BaseController
             callStack.Push(parentID);
 
         var parentCategories = categoryList.categories.Where(x => x.parent_id == parentID).ToList();
-        loadingPanel.OnDeactivation();
-
-        foreach (var item in parentCategories)
+        if(parentCategories.Count>0)
         {
-            GameObject go = Instantiate(category_ProtoType) as GameObject;
-            CategoryViews mCategoryViews = go.GetComponent<CategoryViews>();
-            Button button = go.GetComponent<Button>();
-            mCategoryViews.category = item;
-            button.onClick.AddListener(() =>
-                SetecedCategory(button.gameObject.GetComponent<CategoryViews>())
-            );
+            loadingPanel.OnDeactivation();
+            foreach (var item in parentCategories)
+            {
+                GameObject go = Instantiate(category_ProtoType) as GameObject;
+                CategoryViews mCategoryViews = go.GetComponent<CategoryViews>();
+                Button button = go.GetComponent<Button>();
+                mCategoryViews.category = item;
+                button.onClick.AddListener(() =>
+                    SetecedCategory(button.gameObject.GetComponent<CategoryViews>())
+                );
 
-            go.transform.SetParent(parent, false);
-            categaries.Add(go);
+                go.transform.SetParent(parent, false);
+                categaries.Add(go);
+            }
         }
+        else
+        {
+            BackAction();
+        }
+     
 
     }
 
@@ -97,7 +103,6 @@ public class HomeController : BaseController
     {
         isLoggedIn = false;
         MBApplicationData.Instance.AccessToken = "";
-        RenderData();
         router.ActivateScreen("Login");
         Debug.Log("LogOut pressed");
     }
@@ -105,15 +110,28 @@ public class HomeController : BaseController
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (callStack.Count > 1)
-            {
-                callStack.Pop();
-                ShowCategoies(callStack.Peek(), false);
-                Debug.Log("Back Pressed" + transform.name);
-            }
-            else
-                Debug.Log("No Back avilable");
-             
+            BackAction();
         }
+    }
+    void BackAction()
+    {
+        if (callStack.Count > 1)
+        {
+            callStack.Pop();
+            ShowCategoies(callStack.Peek(), false);
+            Debug.Log("Back Pressed" + transform.name);
+        }
+        else
+            Debug.Log("No Back avilable");
+    }
+    void ResetData()
+    {
+        callStack.Clear();
+        MBApplicationData.Instance.selectedProductID = 0;
+    }
+    private void OnDisable()
+    {
+       // MBApplicationData.Instance.selectedCategoryID = callStack.Peek();
+
     }
 }

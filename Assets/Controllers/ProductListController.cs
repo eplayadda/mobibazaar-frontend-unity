@@ -20,6 +20,7 @@ namespace mb
         }
         void OnEnable()
         {
+            ResetData();
             SetProductByID();
         }
         void SetProductByID()
@@ -32,6 +33,7 @@ namespace mb
 
         void CreateProduct()
         {
+            DestoryCategory();
             var pID = MBApplicationData.Instance.selectedCategoryID;
             var subCategories = productList.products.Where(x => x.categoryId == pID).ToList();
             foreach (var item in subCategories)
@@ -51,13 +53,25 @@ namespace mb
             }
 
         }
-
+        void DestoryCategory()
+        {
+            foreach (var item in products)
+            {
+                Destroy(item);
+            }
+            products.Clear();
+        }
         void SetecedCategory(ProductViews productViews)
         {
             //  loadingPanel.OnActivation();
             Debug.Log("Selected Category ::" + productViews.product.id);
             MBApplicationData.Instance.selectedProductID = productViews.product.id;
             router.ActivateScreen("Products_Details");
+
+        }
+
+        void ResetData()
+        {
 
         }
     }
