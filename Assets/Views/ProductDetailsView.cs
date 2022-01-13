@@ -12,6 +12,7 @@ public class ProductDetailsView :MonoBehaviour, IView
     public Text priceTxt;
     public Text orderPriceTxt;
     public Button addToCartsBtn;
+    public GameObject msgPanel;
 
     public void Activate()
     {

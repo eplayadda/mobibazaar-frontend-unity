@@ -6,16 +6,36 @@ namespace mb
 {
     public class ProductDetailsController : BaseController
     {
+        [HideInInspector] ProductDetailsView productDetailsView;
+
         public string categoryListPath;
         public ProductList productList;
         private void Awake()
         {
             router = gameObject.GetComponentInParent<Router>();
+            productDetailsView = (ProductDetailsView)gameObject.GetComponent<IView>();
+
+            OnClickEvents();
 
         }
         void OnEnable()
         {
             SetProductByID();
+        }
+        void OnClickEvents()
+        {
+            productDetailsView.addToCartsBtn.onClick.AddListener(() => { OnProductAdded(); });
+        }
+        void OnProductAdded()
+        {
+            productDetailsView.msgPanel.SetActive(true);
+            Invoke("DisableMsg", 2f);
+        }
+
+        void DisableMsg()
+        {
+            productDetailsView.msgPanel.SetActive(false);
+            router.ActivateScreen("Products_List");
         }
         void SetProductByID()
         {
