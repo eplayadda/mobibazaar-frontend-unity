@@ -6,7 +6,7 @@ using System.Linq;
 public class Router : MonoBehaviour
 {
     Dictionary<string, IView> allScreens = new Dictionary<string, IView>();
-    List<string> activeViews = new List<string>();
+    public List<string> activeViews = new List<string>();
     private void Start()
     {
         Screen.SetResolution(Screen.width, Screen.height, false);
@@ -37,7 +37,7 @@ public class Router : MonoBehaviour
     public void BackPressed()
     {
         var count = activeViews.Count;
-        if (activeViews[count -1].Equals(allScreens.Keys.ElementAt(0)) || activeViews.Count < 2)
+        if (/*activeViews[count -1].Equals(allScreens.Keys.ElementAt(0)) ||*/ activeViews.Count < 2)
             return;
         string lastScreen = activeViews[activeViews.Count - 2];
         ActivateScreen(lastScreen);
@@ -49,7 +49,7 @@ public class Router : MonoBehaviour
         if (count >1 && activeViews[count - 1].Equals(activeView.Key))
             return;
         activeViews.Add(activeView.Key);
-        if (count > 4)
+        if (count > 20)
             activeViews.RemoveAt(0);
     }
 }

@@ -331,6 +331,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ed25dc027ecab94a820d995b6bb93c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prevScreen: Home
+  router: {fileID: 0}
   categoryListPath: ProductList
   productList:
     products: []

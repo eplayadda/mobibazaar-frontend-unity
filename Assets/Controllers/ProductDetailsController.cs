@@ -4,11 +4,15 @@ using System.Linq;
 using UnityEngine;
 namespace mb
 {
-    public class ProductDetailsController : MonoBehaviour
+    public class ProductDetailsController : BaseController
     {
         public string categoryListPath;
         public ProductList productList;
+        private void Awake()
+        {
+            router = gameObject.GetComponentInParent<Router>();
 
+        }
         void OnEnable()
         {
             SetProductByID();

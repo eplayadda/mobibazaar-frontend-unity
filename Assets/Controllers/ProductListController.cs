@@ -6,14 +6,13 @@ using UnityEngine.UI;
 
 namespace mb
 {
-    public class ProductListController : MonoBehaviour
+    public class ProductListController : BaseController
     {
         public string categoryListPath;
         public ProductList productList;
         public GameObject product_ProtoType;
         public Transform parent;
         public List<GameObject> products = new List<GameObject>();
-        Router router;
         private void Awake()
         {
             router = gameObject.GetComponentInParent<Router>();
