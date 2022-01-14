@@ -25,6 +25,7 @@ namespace mb
                 case "menuBtn":
                     break;
                 case "orderListBtn":
+                    router.ActivateScreen("OrderScreen");
                     break;
                 case "homeBtn":
                     break;
