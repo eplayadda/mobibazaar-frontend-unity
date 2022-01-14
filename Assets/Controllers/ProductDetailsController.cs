@@ -25,6 +25,11 @@ namespace mb
         void OnClickEvents()
         {
             productDetailsView.addToCartsBtn.onClick.AddListener(() => { OnProductAdded(); });
+            productDetailsView.cartListBtnFooter.onClick.AddListener(() => { OnButtonClicked("cartListBtnFooter"); });
+            productDetailsView.cartListBtnHeader.onClick.AddListener(() => { OnButtonClicked("cartListBtnHeader"); });
+            productDetailsView.backBtn.onClick.AddListener(() => { OnButtonClicked("backBtn"); });
+            productDetailsView.orderListBtn.onClick.AddListener(() => { OnButtonClicked("orderListBtn"); });
+            productDetailsView.homeBtn.onClick.AddListener(() => { OnButtonClicked("homeBtn"); });
         }
         void OnProductAdded()
         {

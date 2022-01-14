@@ -11,12 +11,15 @@ namespace mb
         public string categoryListPath;
         public ProductList productList;
         public GameObject product_ProtoType;
+        ProductListView productListView;
         public Transform parent;
         public List<GameObject> products = new List<GameObject>();
         private void Awake()
         {
             router = gameObject.GetComponentInParent<Router>();
+            productListView = (ProductListView)gameObject.GetComponent<IView>();
 
+            OnClickEvents();
         }
         void OnEnable()
         {
@@ -30,7 +33,14 @@ namespace mb
             productList = JsonUtility.FromJson<ProductList>(str);
             CreateProduct();
         }
-
+        void OnClickEvents()
+        {
+            productListView.cartListBtnFooter.onClick.AddListener(() => { OnButtonClicked("cartListBtnFooter"); });
+            productListView.cartListBtnHeader.onClick.AddListener(() => { OnButtonClicked("cartListBtnHeader"); });
+            productListView.backBtn.onClick.AddListener(() => { OnButtonClicked("backBtn"); });
+            productListView.orderListBtn.onClick.AddListener(() => { OnButtonClicked("orderListBtn"); });
+            productListView.homeBtn.onClick.AddListener(() => { OnButtonClicked("homeBtn"); });
+        }
         void CreateProduct()
         {
             DestoryCategory();

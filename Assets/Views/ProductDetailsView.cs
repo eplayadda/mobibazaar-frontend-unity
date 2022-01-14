@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class ProductDetailsView :MonoBehaviour, IView
 {
+    public Button backBtn;
+    public Button homeBtn;
+    public Button orderListBtn;
+    public Button cartListBtnHeader;
+    public Button cartListBtnFooter;
     public Image image;
     public Text productName;
     public Text discription;

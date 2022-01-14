@@ -6,6 +6,12 @@ public class HomeView : MonoBehaviour,IView
 {
     public Button logOutBtn;
     public Text logOutTxt;
+    public Button menuBtn;
+    public Button homeBtn;
+    public Button orderListBtn;
+    public Button cartListBtnHeader;
+    public Button cartListBtnFooter;
+
 
     void Start()
     {

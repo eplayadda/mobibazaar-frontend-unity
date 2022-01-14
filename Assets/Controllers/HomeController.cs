@@ -41,9 +41,14 @@ public class HomeController : BaseController
     }
     void OnClickEvents()
     {
-        signUpView.logOutBtn.onClick.AddListener(() => { OnLogOutClicked(); });
+        signUpView.logOutBtn.onClick.AddListener(() => { OnButtonClicked("logOutBtn"); });
+        signUpView.cartListBtnFooter.onClick.AddListener(() => { OnButtonClicked("cartListBtnFooter"); });
+        signUpView.cartListBtnHeader.onClick.AddListener(() => { OnButtonClicked("cartListBtnHeader"); });
+        signUpView.menuBtn.onClick.AddListener(() => { OnButtonClicked("menuBtn"); });
+        signUpView.orderListBtn.onClick.AddListener(() => { OnButtonClicked("orderListBtn"); });
+        signUpView.homeBtn.onClick.AddListener(() => { OnButtonClicked("homeBtn"); });
     }
-
+   
     void GetCategoryData()
     {
         var response = Resources.Load<TextAsset>(categoryListPath);
