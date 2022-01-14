@@ -14,6 +14,9 @@ namespace mb
             Debug.Log("btnName ::" + btnName);
             switch (btnName)
             {
+                case "checkOut":
+                    router.ActivateScreen("CheckOutScreen");
+                    break;
                 case "logOutBtn":
                     break;
                 case "cartListBtnFooter":

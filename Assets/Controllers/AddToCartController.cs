@@ -24,6 +24,7 @@ namespace mb
         void OnClickEvents()
         {
             addToCartView.cartListBtnHeader.onClick.AddListener(() => { OnButtonClicked("cartListBtnHeader"); });
+            addToCartView.checkOut.onClick.AddListener(() => { OnButtonClicked("checkOut"); });
             addToCartView.backBtn.onClick.AddListener(() => { OnButtonClicked("backBtn"); });
         }
         void ShowCartItems(int parentID = 0, bool addInList = true)
