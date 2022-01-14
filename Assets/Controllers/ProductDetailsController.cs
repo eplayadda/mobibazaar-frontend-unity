@@ -10,6 +10,7 @@ namespace mb
 
         public string categoryListPath;
         public ProductList productList;
+        public Product selectedProduct;
         private void Awake()
         {
             router = gameObject.GetComponentInParent<Router>();
@@ -33,6 +34,9 @@ namespace mb
         }
         void OnProductAdded()
         {
+            AddToCart addToCart = new AddToCart();
+            addToCart.name = selectedProduct.name;
+            MBApplicationData.Instance.addToCartList.products.Add(addToCart);
             productDetailsView.msgPanel.SetActive(true);
             Invoke("DisableMsg", 2f);
         }
@@ -52,7 +56,7 @@ namespace mb
         void ShowProduct()
         {
             var pID = MBApplicationData.Instance.selectedProductID;
-            var mProduct = productList.products.Where(x => x.id == pID).ToList();
+            selectedProduct = productList.products.Where(x => x.id == pID).FirstOrDefault();
         }
     }
 

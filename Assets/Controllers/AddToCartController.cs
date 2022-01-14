@@ -8,32 +8,47 @@ namespace mb
     public class AddToCartController : BaseController
     {
         [HideInInspector] AddToCartView addToCartView ;
+        public List<GameObject> cartItemsGo = new List<GameObject>();
+        public Transform parent;
 
         private void Awake()
         {
             router = gameObject.GetComponentInParent<Router>();
             addToCartView = (AddToCartView)gameObject.GetComponent<IView>();
+            OnClickEvents();
         }
         private void OnEnable()
         {
             ShowCartItems(MBApplicationData.Instance.selectedCategoryID);
         }
+        void OnClickEvents()
+        {
+            addToCartView.cartListBtnHeader.onClick.AddListener(() => { OnButtonClicked("cartListBtnHeader"); });
+            addToCartView.backBtn.onClick.AddListener(() => { OnButtonClicked("backBtn"); });
+        }
         void ShowCartItems(int parentID = 0, bool addInList = true)
         {
-            for (int i = 0; i < 4; i++)
+            var cartItems = MBApplicationData.Instance.addToCartList.products;
+            DestoryCartItems();
+            foreach (var item in cartItems)
             {
                 GameObject go = Instantiate(addToCartView.addTCartProtoType) as GameObject;
-                AddToCartView mAddToCartView = go.GetComponent<AddToCartView>();
+                AddToCartElementView mAddToCartView = go.GetComponent<AddToCartElementView>();
                 Button button = go.GetComponent<Button>();
-             //   mAddToCartView.category = item;
-            //    button.onClick.AddListener(() =>
-              //      SetecedCategory(button.gameObject.GetComponent<CategoryViews>())
-              //  );
-
-               // go.transform.SetParent(parent, false);
-               // categaries.Add(go);
+                mAddToCartView.name = item.name;
+                go.transform.SetParent(parent, false);
+                cartItemsGo.Add(go);
             }
+           
 
+        }
+        void DestoryCartItems()
+        {
+            foreach (var item in cartItemsGo)
+            {
+                Destroy(item);
+            }
+            cartItemsGo.Clear();
         }
     }
 }

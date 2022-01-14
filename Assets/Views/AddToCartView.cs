@@ -7,7 +7,7 @@ namespace mb
     public class AddToCartView : MonoBehaviour, IView
     {
         public Button checkOut;
-        public Button addToCart;
+        public Button cartListBtnHeader;
         public Button backBtn;
         public Text totalAmount;
         public GameObject addTCartProtoType;

@@ -12,6 +12,7 @@ namespace mb
         static MBApplicationData mInstance;
         public int selectedCategoryID;
         public int selectedProductID;
+        public AddToCartList addToCartList = new AddToCartList();
         public static MBApplicationData Instance
         {
             get
