@@ -32,6 +32,8 @@ namespace mb
                     router.ActivateScreen("OrderScreen");
                     break;
                 case "homeBtn":
+                    MBApplicationData.Instance.selectedCategoryID = 0;
+                    router.ActivateScreen("Home");
                     break;
                 case "backBtn":
                     router.ActivateScreen(prevScreen);
