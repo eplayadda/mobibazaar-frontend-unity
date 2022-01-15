@@ -102,7 +102,7 @@ public class HomeController : BaseController
         MBApplicationData.Instance.selectedCategoryID = categoryView.category.id;
         if (subCategories.Count > 0)
             ShowCategoies(categoryView.category.id);
-        else router.ActivateScreen("Products_List");
+        else router.ActivateScreen("Products_List",transform.name,false);
     }
     void OnLogOutClicked()
     {

@@ -26,6 +26,7 @@ namespace mb
                     router.ActivateScreen("AddToCart");
                     break;
                 case "menuBtn":
+                    router.ActivateScreen("MainMenuScreen","Home",false);
                     break;
                 case "orderListBtn":
                     router.ActivateScreen("OrderScreen");

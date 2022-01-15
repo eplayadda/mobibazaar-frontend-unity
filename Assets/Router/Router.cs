@@ -23,11 +23,13 @@ public class Router : MonoBehaviour
         ActivateScreen(views[0].GameObjectName());
     }
 
-    public void ActivateScreen(string screenName)
+    public void ActivateScreen(string screenName,string currScreen ="",bool needToDisableCurrent = true)
     {
         var activeView = allScreens.Where(x => x.Value.GameObjectName().Equals(screenName)).FirstOrDefault();
         foreach (var item in allScreens)
         {
+            if (!needToDisableCurrent && item.Key.Equals(currScreen))
+                continue;
             item.Value.Deactivate();
         }
         activeView.Value.Activate();
